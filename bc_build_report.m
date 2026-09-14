@@ -171,8 +171,15 @@ fprintf(fid, 'window.BIKE_REPORT_DATA = %s;\n', json_str);
 fclose(fid);
 
 fprintf('\n[bc_build_report] Done.\n');
-fprintf('  report_data.js written (%d run(s))\n', numel(runs_json));
-fprintf('  Open report.html in a browser to view the report.\n\n');
+fprintf('  report_data.js written (%d run(s))\n\n', numel(runs_json));
+fprintf('  NEXT STEPS to publish on GitHub Pages:\n');
+fprintf('  1. Commit report_data.js to the repo:\n');
+fprintf('        git add report_data.js\n');
+fprintf('        git commit -m "Update report data"\n');
+fprintf('        git push\n');
+fprintf('  2. Wait ~60 s for Pages to rebuild, then open:\n');
+fprintf('     https://miladnikmand.github.io/bike-lean-steer-control/report.html\n\n');
+fprintf('  Viewing locally: open report.html directly in a browser (no server needed).\n\n');
 
 % ---- Try to open the browser (best-effort) ------------------------------
 html_path = fullfile(pwd, 'report.html');
