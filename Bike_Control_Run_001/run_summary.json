@@ -1,0 +1,149 @@
+{
+  "schema": "bike-lean-steer-control/1.0",
+  "run_number": 1,
+  "run_folder": "Bike_Control_Run_001",
+  "generated": "2026-09-13 17:37:01",
+  "speed_m_s": 1,
+  "regime": "UNSTABLE",
+  "max_re_ol": 3.526961709900692,
+  "bike_params": {
+    "mB": 85,
+    "w": 1.02,
+    "c": 0.08,
+    "lambda_deg": 18,
+    "rR": 0.3,
+    "rF": 0.35
+  },
+  "initial_conditions": {
+    "phi0_deg": 5,
+    "delta0_deg": -2
+  },
+  "constraints": {
+    "phi_limit_deg": 90,
+    "delta_sat_deg": 60,
+    "steer_rate_limit_deg_s": null,
+    "note": "phi_limit = hard stop (bike fell). delta_sat = clamp only, run continues."
+  },
+  "disturbance": {
+    "kick_enabled": false,
+    "kick_time": 5,
+    "kick_mag_deg": 15,
+    "kick_duration": 0.3,
+    "gravel_enabled": false,
+    "gravel_start": 8,
+    "gravel_end": 15,
+    "gravel_std": 5,
+    "camber_enabled": false,
+    "camber_deg": 3,
+    "wind_enabled": false,
+    "wind_start": 5,
+    "wind_ramp": 1,
+    "wind_hold": 4,
+    "wind_speed": 8,
+    "sine_road_enabled": false,
+    "sine_road_start": 0,
+    "sine_road_freq": 2,
+    "sine_road_amp": 3,
+    "speed_var_enabled": false,
+    "speed_var_amp": 1.5,
+    "speed_var_freq": 0.1
+  },
+  "runs": {
+    "uncontrolled": {
+      "label": "Uncontrolled",
+      "k_info": "",
+      "failed": true,
+      "fail_time": 1.3,
+      "fail_msg": "|phi|=91.4 deg > 90 deg (bike fell)",
+      "settle_time": null,
+      "max_re_cl": 3.526961709900692,
+      "sat_count": 19,
+      "sat_first_t": 0.93,
+      "saturated": true
+    },
+    "RateOnly": {
+      "label": "Rate-Only  (T=k*phi_dot)",
+      "k_info": "k=47.51 N*m*s/rad",
+      "failed": false,
+      "fail_time": null,
+      "fail_msg": "",
+      "settle_time": 3.8000000000000003,
+      "max_re_cl": -0.51475655375999563,
+      "sat_count": 14,
+      "sat_first_t": 0.53,
+      "saturated": true
+    },
+    "PD": {
+      "label": "PD  (T=k1*phi+k2*phi_dot)",
+      "k_info": "k1=250.0  k2=82.0",
+      "failed": false,
+      "fail_time": null,
+      "fail_msg": "",
+      "settle_time": 0.33,
+      "max_re_cl": -3.3334851724092145,
+      "sat_count": 0,
+      "sat_first_t": null,
+      "saturated": false
+    },
+    "PID": {
+      "label": "PID  (phi+phi_dot+int_phi)",
+      "k_info": "k1=20.0  k2=188.0  k3=50.0",
+      "failed": false,
+      "fail_time": null,
+      "fail_msg": "",
+      "settle_time": 5.14,
+      "max_re_cl": -0.63518717906901268,
+      "sat_count": 0,
+      "sat_first_t": null,
+      "saturated": false
+    },
+    "LQR": {
+      "label": "LQR  (optimal full-state)",
+      "k_info": "Q=diag[100 1 10 1]  R=0.10",
+      "failed": false,
+      "fail_time": null,
+      "fail_msg": "",
+      "settle_time": 0.81,
+      "max_re_cl": -2.1295356244473,
+      "sat_count": 0,
+      "sat_first_t": null,
+      "saturated": false
+    },
+    "FullState": {
+      "label": "Full-State  (pole placement)",
+      "k_info": "poles: [-4 -5 -6 -7]",
+      "failed": false,
+      "fail_time": null,
+      "fail_msg": "",
+      "settle_time": 0.47000000000000003,
+      "max_re_cl": -3.9999999999996088,
+      "sat_count": 0,
+      "sat_first_t": null,
+      "saturated": false
+    },
+    "LQG": {
+      "label": "LQG  (LQR + Kalman observer)",
+      "k_info": "observes phi_dot only; estimates full state",
+      "failed": true,
+      "fail_time": 11.25,
+      "fail_msg": "|phi|=90.7 deg > 90 deg (bike fell)",
+      "settle_time": null,
+      "max_re_cl": -2.1295356244473,
+      "sat_count": 123,
+      "sat_first_t": 0.59,
+      "saturated": true
+    },
+    "GainSched": {
+      "label": "Gain-Scheduled  (speed-zone rate gains)",
+      "k_info": "zones: v<3->k=28.0 | 3-5.5->k=0.0 | v>5.5->k=0.0",
+      "failed": false,
+      "fail_time": null,
+      "fail_msg": "",
+      "settle_time": null,
+      "max_re_cl": 1.2196840606814785,
+      "sat_count": 923,
+      "sat_first_t": 0.53,
+      "saturated": true
+    }
+  }
+}
